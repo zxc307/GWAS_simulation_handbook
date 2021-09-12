@@ -36,3 +36,19 @@ done
       cp ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin.bim ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin.bim.cp
       awk '{{print $1,"chr"$1"_"$4,$3,$4,$5,$6}}' ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin.bim.cp > ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin.bim
 
+
+for popC in {YRI,CHB,GBR}
+do 
+  for generationN in {30,100,300}
+  do
+    for inputN in {30,60,90}
+    do
+      for chrN in {9..10..1}
+      do
+      slim ./$popC/$popC.POP$inputN/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
+      perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.vcf > ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.vcf
+      plink --vcf ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.vcf --make-bed --out ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin
+      done
+    done
+  done
+done

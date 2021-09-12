@@ -24,7 +24,20 @@ samtools faidx hs37d5.fa "$chr" > hs37d5_chr$chr.fa
 done
 ```
 
-## Program sources
+## Program sources <span style="color:blue">some *All examples in this script are run in Linux system* text</span>
+### Plink and Plink2
+Plink(version 1.9) and Plink2(alpha) combined are used in this script. Plink2 is an advanced version of the popular Plink and it has lots of new features and options in data management. However, it is a in development and only beta versions are available. Thus, we recommend to use Plink 1.9 for some basic data management process and only use Plink2 for new features that have been tested.
+#### Plink and Plink2 website
+```ruby
+https://www.cog-genomics.org/plink/1.9/
+```
+#### Downloads
+Both Plink and Plink2 have excutable binary versions so you can directly run them after downloads and do not need to install them into your system.
+```ruby
+ttps://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20210606.zip
+https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20210908.zip
+```
+
 ### SLiM
 #### Website
 ```ruby
@@ -213,14 +226,9 @@ do
   done
 done
 ```
-        
-
-
-
-
-
 #### WGS data merge
 ##### Create mergelist
+```ruby
 for simN in {1..10..1}
 do
   for popC in {YRI,CHB,GBR}
@@ -234,9 +242,9 @@ do
     done
   done
 done
-
+```
 ##### Merge
-for simN in {1..1..1}
+for simN in {1..10..1}
 do
   for popC in {YRI,CHB,GBR}
   do 
@@ -264,19 +272,3 @@ done
 
 ### HWE check (common variants)
 
-
-for popC in {YRI,CHB,GBR}
-do 
-  for generationN in {30,100,300}
-  do
-    for inputN in {30,60,90}
-    do
-      for chrN in {9..10..1}
-      do
-      slim ./$popC/$popC.POP$inputN/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
-      perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.vcf > ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.vcf
-      plink --vcf ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.vcf --make-bed --out ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.bin
-      done
-    done
-  done
-done

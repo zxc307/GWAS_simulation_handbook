@@ -1,3 +1,4 @@
+./popC/popC.POPinputN/simsimN.gengenerationN.chr1.notri.bin
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr2.notri.bin
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr3.notri.bin
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr4.notri.bin
@@ -19,4 +20,3 @@
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr20.notri.bin
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr21.notri.bin
 ./popC/popC.POPinputN/simsimN.gengenerationN.chr22.notri.bin
-
