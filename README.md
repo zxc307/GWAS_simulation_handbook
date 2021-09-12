@@ -24,8 +24,7 @@ samtools faidx hs37d5.fa "$chr" > hs37d5_chr$chr.fa
 done
 ```
 
-## Program sources 
-All examples in this script are run in Linux system <span style="color:blue">some *blue* text</span>
+## Program sources *All examples in this script are run in Linux system*
 ### Plink and Plink2
 Plink(version 1.9) and Plink2(alpha) combined are used in this script. Plink2 is an advanced version of the popular Plink and it has lots of new features and options in data management. However, it is a in development and only beta versions are available. Thus, we recommend to use Plink 1.9 for some basic data management process and only use Plink2 for new features that have been tested.
 #### Plink and Plink2 website
