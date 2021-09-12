@@ -1,0 +1,31 @@
+initialize() {
+	initializeSLiMOptions(nucleotideBased=T);
+	length = initializeAncestralNucleotides("./fasta/hs37d5_chrchrN.fa");
+	defineConstant("L", length);
+	initializeMutationTypeNuc("m1", 0.5, "f", 0.0);
+	initializeGenomicElementType("g1", m1, 1.0, mmJukesCantor(1e-7));
+	initializeGenomicElement(g1, 0, L-1); 
+	initializeRecombinationRate(1e-8);
+} 
+1 late() {
+	sim.addSubpop("p1", inputN);
+	p1.genomes.readFromVCF("./popC/popC.chrchrN.inputN.recode.vcf", m1);
+	p1.setSubpopulationSize(300);
+	log = sim.createLogFile("./popC/popC.POPinputN/simsimN.gengenerationN.chrchrN.log",logInterval=1);
+	log.addGeneration();
+	log.addSubpopulationSize(p1);
+	log.addCustomColumn("FreqA", "nucleotideFrequencies(sim.chromosome.ancestralNucleotides())[0];");
+	log.addCustomColumn("FreqC", "nucleotideFrequencies(sim.chromosome.ancestralNucleotides())[1];");
+	log.addCustomColumn("FreqG", "nucleotideFrequencies(sim.chromosome.ancestralNucleotides())[2];");
+	log.addCustomColumn("FreqT", "nucleotideFrequencies(sim.chromosome.ancestralNucleotides())[3];");
+} 
+1:generationN late() {
+	mut = sim.mutationsOfType(m1);
+}
+generationN late() { 
+	g = p1.sampleIndividuals(200).genomes;
+	g.outputVCF("./popC/popC.POPinputN/simsimN.gengenerationN.chrchrN.vcf");}
+
+
+
+
