@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#SBATCH -n 4
+
+#SBATCH -A frs2
+
+#SBATCH --mem=16gb
+
+#SBATCH --time=300:00:00
+
+#SBATCH --output=out2000.popC.POPinputN.simNsimNumber.gengenerationN.stdout 
+
+#SBATCH --mail-user=zxc307@case.edu 
+
+#SBATCH --mail-type=ALL 
+
+#SBATCH --job-name="out2000.popC.POPinputN.simNsimNumber.gengenerationN" 
+
+cd /mnt/rstor/SOM_EPBI_FRS2/zxc307/1000g2021
+module load slim
+module load plink
+module load vcftools
+module load plink2
+
+for chrN in {11..22..1}
+do
+slim ./popC/popC.POPinputN/out2000/slim.code.popC.POPinputN.simNsimNumber.gengenerationN.chr$chrN.txt
+perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./popC/popC.POPinputN/out2000/simsimN.gengenerationN.chr$chrN.vcf > ./popC/popC.POPinputN/out2000/simsimN.gengenerationN.chr$chrN.notri.vcf
+done
