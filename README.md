@@ -170,7 +170,7 @@ do
       do
         for chrN in {1..22..1}
         do
-        cat slim.code.template.txt | sed "s/popC/$popC/g" | sed "s/simN/$simN/g" | sed "s/generationN/$generationN/g" | sed "s/inputN/$inputN/g" | sed "s/chrN/$chrN/g" > ./$popC/$popC.POP$inputN/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
+        cat slim.code.template.txt | sed "s/popC/$popC/g" | sed "s/simN/$simN/g" | sed "s/generationN/$generationN/g" | sed "s/inputN/$inputN/g" | sed "s/chrN/$chrN/g" > ./$popC/$popC.POP$inputN/out2000/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
         done
       done
     done
@@ -179,6 +179,10 @@ done
 ```
 #### Simulate WGS data
 ```ruby
+**************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
 cd /mnt/rstor/SOM_EPBI_FRS2/zxc307/1000g2021
 module load slim
 module load plink
@@ -193,10 +197,10 @@ do
     do
       for inputN in {30,60,90}
       do
-        for chrN in {1..22..1}
+        for chrN in {9..9..1}
         do
-        slim ./$popC/$popC.POP$inputN/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
-        perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.vcf > ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr$chrN.notri.vcf
+        slim ./$popC/$popC.POP$inputN/out2000/slim.code.$popC.POP$inputN.simN$simN.gen$generationN.chr$chrN.txt
+        perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./$popC/$popC.POP$inputN/out2000/sim$simN.gen$generationN.chr$chrN.vcf > ./$popC/$popC.POP$inputN/out2000/sim$simN.gen$generationN.chr$chrN.notri.vcf
         done
       done
     done
@@ -244,6 +248,7 @@ do
 done
 ```
 ##### Merge
+```ruby
 for simN in {1..10..1}
 do
   for popC in {YRI,CHB,GBR}
@@ -252,17 +257,92 @@ do
     do
       for inputN in {30,60,90}
       do
-      plink --bfile ./$popC/$popC.POP$inputN/sim$simN.gen$generationN.chr1.notri.bin --merge-list ./$popC/$popC.POP$inputN/mergelist.$popC.POP$inputN.simN$simN.gen$generationN.txt --make-bed --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin
+      plink2 --pmerge-list ./$popC/$popC.POP$inputN/mergelist.$popC.POP$inputN.simN$simN.gen$generationN.txt --make-pgen --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin
       done
     done
   done
 done
-
+```
 ## WGS to GWAS
 
 ## GWAS quality control
 
 ### Principal component analysis
+#### Reference panel data management
+```ruby
+for chr in {1..22..1}
+do  
+vcftools --gzvcf ALL.chr$chr.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --remove-indels --mac 1 --recode --out ./refplink/1000Gwhole.chr$chr
+cat ./refplink/1000Gwhole.chr$chr.recode.vcf | awk '!a[$2]++{print}' > ./refplink/1000Gwhole.chr$chr.recode.vcf.cp
+perl -lane 'if(/^#/ or length("$F[3]$F[4]")==2){print}' ./refplink/1000Gwhole.chr$chr.recode.vcf.cp > ./refplink/1000Gwhole.chr$chr.recode.vcf
+plink2 --vcf ./refplink/1000Gwhole.chr$chr.recode.vcf --make-bed --out ./refplink/ref1000G.chr$chr
+cp ./refplink/ref1000G.chr$chr.bim ./refplink/ref1000G.chr$chr.bim.cp
+awk '{{print "'$chr'","chr""'$chr'""_"$4,$3,$4,$5,$6}}' ./refplink/ref1000G.chr$chr.bim.cp > ./refplink/ref1000G.chr$chr.bim
+plink2 --bfile ./refplink/ref1000G.chr$chr --make-pgen --out ./refplink/ref1000G.chr$chr
+done
+plink2 --pmerge-list refmergelist.txt --merge-max-allele-ct 2 --make-pgen --out ./refplink/ref1000G.whole
+plink2 --pfile ./refplink/1000G.whole --indep 50 5 2 --out ./refplink/1000G.whole
+```
+#### PCA data merge and prune
+```ruby
+for simN in {1..10..1}
+do
+  for popC in {YRI,CHB,GBR}
+  do 
+    for generationN in {30,100,300}
+    do
+      for inputN in {30,60,90}
+      do
+      sed '1 /\.\/simulatedWGS\/simN'$simN'\.'$popC'\.POPin'$inputN'\.gen'$generationN'\.notri\.bin/g;p' -i simmerge.list.txt
+      done
+    done
+  done
+done
+
+for simN in {1..10..1}
+do
+  for popC in {YRI,CHB,GBR}
+  do
+    for generationN in {30,100,300}
+    do
+      for inputN in {30,60,90}
+      do
+      plink2 --pfile ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin --make-bed --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin
+      plink --bfile ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin --bmerge ./refplink/ref1000G.whole.prune --merge-mode 1 --geno 0.01 --make-bed --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.pca
+      done
+    done
+  done
+done
+
+simN=1;popC=YRI;generationN=30;inputN=30;
+plink2 --pfile ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin --pmerge ./refplink/ref1000G.whole.prune --geno 0.01 --make-pgen --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.pca
+      
+
+plink2 --pfile ./refplink/ref1000G.whole.prune --make-bed --out ./refplink/ref1000G.whole.prune
+
+plink2 --pfile ./refplink/1000G.whole --make-bed --out ./refplink/1000G.whole
+      plink2 --pfile ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin --make-bed --out ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin
+      plink --bfile ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin --bmerge ./refplink/1000G.whole --make-bed --out ./PCA/simN$simN.$popC.POPin$inputN.gen$generationN.forPCA
+      plink2 --bfile ./PCA/simN$simN.$popC.POPin$inputN.gen$generationN.forPCA --pca-aprox --out ./PCA/PCA.simN$simN.$popC.POPin$inputN.gen$generationN
+
+      
+
+find ./simulatedWGS/ -name "simN$simN.*.POPin$inputN.gen$generationN.notri.bin.log" | sort | sed "s/\.log//" > ./simmerge.simN$simN.POPin$inputN.gen$generationN.list.txt
+      plink2 --pmerge-list ./simmerge.simN$simN.POPin$inputN.gen$generationN.list.txt --make-pgen --out ./simulatedWGS/mergeforPCA.simN$simN.POPin$inputN.gen$generationN
+      
+
+
+```
+      cp ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.psam ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.psam.cp
+      awk -v FS="\t" '{{print "'$popC'""_simN""'$simN'",$2,$3}}' ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.psam.cp > ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.psam
+      sed -i "1c #FID \t IID \t SEX" ./simulatedWGS/simN$simN.$popC.POPin$inputN.gen$generationN.notri.bin.psam
+
+
+*******************************************************************************************************************
+*******************************************************************************************************************
+*******************************************************************************************************************
+*******************************************************************************************************************
+
 
 ### Structure analysis
 
