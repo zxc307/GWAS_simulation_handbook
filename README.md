@@ -351,4 +351,4 @@ find ./simulatedWGS/ -name "simN$simN.*.POPin$inputN.gen$generationN.notri.bin.l
 ### Kinship analysis
 
 ### HWE check (common variants)
-123
+
