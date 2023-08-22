@@ -2,9 +2,6 @@
 
 * [About This Handbook](#About)
 * [Getting Started](#getting-started)
-  * [Install Software](#install-software)
-  * [Reference Data](#data)
-  * [A quick Simulation](#a-quick-simulation)
 * [Simulation Examples](#simulation-examples)
 * [Parameter Effects](#parameter-effects)
 * [Post Simulation Quality Control](#post-simulation-quality-control)
@@ -47,6 +44,26 @@ Plink2 is an advanced version with lots of new features and most importantly run
 However, it is still under development and [some modules such as fully-powered data merging are not available yet](https://www.cog-genomics.org/plink/2.0/#:~:text=its%20own%20score.-,Coming%20next,-Fully%2Dpowered%20merge).
 Thus, we recommend to use Plink 1.9 for some basic data management process and only use Plink2 for new and fully-powered features.
 
+#### SLiM
+The official site of SLiM can be found [here](https://messerlab.org/).
+You can also visit their [GitHub site](https://github.com/MesserLab/SLiM).
+All versions of SLiM release and detailed documentations are also available [here](https://github.com/MesserLab/SLiM/releases).
+
+#### VCFtools
+Their official GitHub site is [here](https://github.com/vcftools/vcftools) with a detailed [manual](https://vcftools.github.io/man_latest.html)
+
+
+
 ## Web Resources
 ## Getting Help
+### Regarding this handbook
+If you have any questions or need help with this handbook, you can either create an issue under this repository or email me at zxc307@case.edu.
+
+### Regarding related software
+Following are mailing lists for related software:
+[plink 1.9/2.0](plink2-users@googlegroups.com)
+[SLiM](slim-discuss@googlegroups.com)
+[vcftools](vcftools-help@lists.sourceforge.net)
+
+
 ## Acknowledgements
