@@ -16,7 +16,7 @@
 
 ## About This Handbook
 
-We aim to present a straightforward guide to the quality control, data simulation and simulation quality assessment of individual-level pseudo GWAS data. Our handbook targets on beginners of GWAS simulation. Advanced users requiring more complex modeling strategies are recommended to consult software developer’s websites to seek options that are more sophisticated. A brief list of these is provided in the * [Data and Software Resources](#data-and-software-resources) section.
+We aim to present a straightforward guide to the quality control, data simulation and simulation quality assessment of individual-level pseudo GWAS data. Our handbook targets on beginners of GWAS simulation. Advanced users requiring more complex modeling strategies are recommended to consult software developer’s websites to seek options that are more sophisticated. A brief list of these is provided in the [Data and Software Resources](#data-and-software-resources) section.
 
 ## Getting Started
 ### Install Software
@@ -27,6 +27,19 @@ We aim to present a straightforward guide to the quality control, data simulatio
 ## Post Simulation Quality Control
 ## Files In This Github Repository
 ## Data and Software Resources
+
+### Data resources
+#### 1000G phase 3 reference data (2502 individuals)
+You can download the open-access data from the [FTP server](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/).
+A brief description of the data can be found in the [documentation](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/README_phase3_callset_20150220).
+In Linux, you can download all VCF format data with FASTA format ancestral sequence using the following code:
+```ruby
+wget -r -np -nd ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/
+wget -r -np -nd ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+gzip -d hs37d5.fa.gz
+for chr in {1..22..1};do;samtools faidx hs37d5.fa "$chr" > hs37d5_chr$chr.fa;done
+```
+
 ## Web Resources
 ## Getting Help
 ## Acknowledgements
