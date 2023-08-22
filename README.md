@@ -27,7 +27,7 @@ We aim to present a straightforward guide to the quality control, data simulatio
 ## Data and Software Resources
 
 ### Data resources
-#### 1000G phase 3 reference data (2502 individuals)
+* 1000G phase 3 reference data (2502 individuals)
 You can download the open-access data from the [FTP server](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/).
 A brief description of the data can be found in the [documentation](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/README_phase3_callset_20150220).
 In Linux, you can download all VCF format data with FASTA format ancestral sequence using the following code:
@@ -68,7 +68,7 @@ Following are mailing lists for related software:
 * [plink 1.9/2.0](plink2-users@googlegroups.com)
 * [SLiM](slim-discuss@googlegroups.com)
 * [vcftools](vcftools-help@lists.sourceforge.net)
-* [SAMtools](samtools-help@lists.sourceforge.net) You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
+* [SAMtools](samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
