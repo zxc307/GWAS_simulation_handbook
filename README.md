@@ -65,15 +65,15 @@ If you have any questions or need help with this handbook, you can either create
 
 ### Regarding related software
 Following are mailing lists for related software:
-[plink 1.9/2.0](plink2-users@googlegroups.com)
-[SLiM](slim-discuss@googlegroups.com)
-[vcftools](vcftools-help@lists.sourceforge.net)
-[SAMtools](samtools-help@lists.sourceforge.net) You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
+*[plink 1.9/2.0](plink2-users@googlegroups.com)
+*[SLiM](slim-discuss@googlegroups.com)
+*[vcftools](vcftools-help@lists.sourceforge.net)
+*[SAMtools](samtools-help@lists.sourceforge.net) You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
-[SLiM/issues](https://github.com/MesserLab/SLiM/issues)
-[SAMtools/issues](https://github.com/samtools/samtools/issues)
-[vcftools/issues](https://github.com/vcftools/vcftools/issues)
+*[SLiM/issues](https://github.com/MesserLab/SLiM/issues)
+*[SAMtools/issues](https://github.com/samtools/samtools/issues)
+*[vcftools/issues](https://github.com/vcftools/vcftools/issues)
 
 ## Acknowledgements
