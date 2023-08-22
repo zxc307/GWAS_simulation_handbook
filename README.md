@@ -50,8 +50,11 @@ You can also visit their [GitHub site](https://github.com/MesserLab/SLiM).
 All versions of SLiM release and detailed documentations are also available [here](https://github.com/MesserLab/SLiM/releases).
 
 #### VCFtools
-Their official GitHub site is [here](https://github.com/vcftools/vcftools) with a detailed [manual](https://vcftools.github.io/man_latest.html)
+Their official GitHub site is [here](https://github.com/vcftools/vcftools) with a detailed [manual](https://vcftools.github.io/man_latest.html).
 
+#### SAMtools
+Authors of SAMtools provide some standard workflows on their [homepage](http://www.htslib.org/).
+You can also check their latest [manual](http://www.htslib.org/doc/samtools.html).
 
 
 ## Web Resources
