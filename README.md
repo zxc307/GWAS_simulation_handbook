@@ -40,6 +40,13 @@ gzip -d hs37d5.fa.gz
 for chr in {1..22..1};do;samtools faidx hs37d5.fa "$chr" > hs37d5_chr$chr.fa;done
 ```
 
+### Program sources (*All examples in this repository are run in Linux system*)
+#### Plink and Plink2
+[Plink 1.9](https://www.cog-genomics.org/plink/1.9/) and [Plink 2](https://www.cog-genomics.org/plink/2.0/) combined are used in this script.
+Plink2 is an advanced version with lots of new features and most importantly runs faster.
+However, it is still under development and [some modules such as fully-powered data merging are not available yet](https://www.cog-genomics.org/plink/2.0/#:~:text=its%20own%20score.-,Coming%20next,-Fully%2Dpowered%20merge).
+Thus, we recommend to use Plink 1.9 for some basic data management process and only use Plink2 for new and fully-powered features.
+
 ## Web Resources
 ## Getting Help
 ## Acknowledgements
