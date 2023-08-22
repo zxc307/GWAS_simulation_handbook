@@ -58,7 +58,7 @@ Authors of SAMtools provide some standard workflows on their [homepage](http://w
 You can also check their latest [manual](http://www.htslib.org/doc/samtools.html).
 
 
-## Web Resources
+## Other Web Resources
 * [Genetic Simulation Resources (GSR)](https://surveillance.cancer.gov/genetic-simulation-resources/)
 Genetic Simulation Resources is provided by the Division of Cancer Control and Population Sciences at the NCI.
 This website provides a catalogue of existing software packages that simulate genetic data of the human genome. This website is designed to help you identify simulators that meet your particular research needs, compare simulators based on attributes and provide feedback to authors of existing simulators.
