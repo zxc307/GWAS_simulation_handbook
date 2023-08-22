@@ -59,6 +59,13 @@ You can also check their latest [manual](http://www.htslib.org/doc/samtools.html
 
 
 ## Web Resources
+* [Genetic Simulation Resources (GSR)](https://surveillance.cancer.gov/genetic-simulation-resources/)
+Genetic Simulation Resources is provided by the Division of Cancer Control and Population Sciences at the NCI.
+This website provides a catalogue of existing software packages that simulate genetic data of the human genome. This website is designed to help you identify simulators that meet your particular research needs, compare simulators based on attributes and provide feedback to authors of existing simulators.
+* [JoniColeman's GWAS codebook](https://github.com/JoniColeman/gwas_scripts/tree/master)
+The scripts in this GitHub repository provide a straight-forward guide to the quality control, imputation and analysis of genome-wide genotype data.
+* [stdpopsim](https://popsim-consortium.github.io/stdpopsim-docs/stable/introduction.html)
+Stdpopsim is a community-maintained standard library of population genetic models.
 ## Getting Help
 ### Regarding this handbook
 If you have any questions or need help with this handbook, you can either create an issue under this repository or email me at zxc307@case.edu.
@@ -79,6 +86,6 @@ You can also get support by creating issues under GitHub repositories of the fol
 ## Acknowledgements
 Great thanks to the following people for their help and input:
 * [Dr. Benjamin C. Haller](http://benhaller.com/) provided invaluable assistance in coding and SLiM debugging.
-* [Dr. Wei-min Chen](https://med.virginia.edu/faculty/faculty-listing/wc9c/) shared his expertise and gave us great advice regarding genetic relatedness issues.
 * [Dr. Christopher Chang](https://www.linkedin.com/in/christopher-chang-6910a51/) provided great help with Plink-related issues and code debugging.
 * [Dr. Fredrick Schumacher](https://case.edu/medicine/pqhs/about/people/primary-faculty/fredrick-r-schumacher) supervised and funded this project.
+* [Dr. Wei-min Chen](https://med.virginia.edu/faculty/faculty-listing/wc9c/) shared his expertise and gave us great advice regarding genetic relatedness issues.
