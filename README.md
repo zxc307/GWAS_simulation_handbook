@@ -18,7 +18,7 @@ We aim to present a straightforward guide to the quality control, data simulatio
 ## Getting Started
 ### Install Software
 Visit the SLiM official GitHub repository to download the latest version of the source code: https://github.com/MesserLab/SLiM/releases.
-Here I presented an example of installation using [CMake](https://cmake.org/) in Linux.
+Here I presented an example of installation using [CMake](https://cmake.org/) in Linux, as GWAS simulations are heavy loading jobs and usually run on servers/high performance computing systems where Linux is widely used.
 ```ruby
 wget https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM.zip
 unzip ./SLiM.zip
