@@ -17,7 +17,19 @@ We aim to present a straightforward guide to the quality control, data simulatio
 
 ## Getting Started
 ### Install Software
-
+Visit the SLiM official GitHub repository to download the latest version of the source code: https://github.com/MesserLab/SLiM/releases.
+Here I presented an example of installation using [CMake](https://cmake.org/) in Linux.
+```ruby
+wget https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM.zip
+unzip ./SLiM.zip
+cd SLiM
+mkdir build
+cd build
+cmake ../
+make slim
+```
+The executive will be created in the "build" folder.
+If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I highly recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
 ### Reference Data
 ### A quick Simulation
 ## Simulation Examples
