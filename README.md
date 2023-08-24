@@ -90,7 +90,7 @@ Following are mailing lists for related software:
 plink 1.9/2.0: plink2-users@googlegroups.com  
 SLiM: slim-discuss@googlegroups.com  
 vcftools: vcftools-help@lists.sourceforge.net  
-SAMtools: samtools-help@lists.sourceforge.net： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)  
+SAMtools: samtools-help@lists.sourceforge.net  You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)  
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
