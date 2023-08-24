@@ -1,6 +1,6 @@
 ## Table of Contents
 
-* [About This Handbook](#About)
+* [About This Handbook](#About-this-handbook)
 * [Getting Started](#getting-started)
 * [Simulation Examples](#simulation-examples)
 * [Parameter Effects](#parameter-effects)
