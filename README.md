@@ -27,21 +27,47 @@ mkdir build
 cd build
 cmake ../
 make slim
+#The executive will be created in the "build" folder.
 ```
-The executive will be created in the "build" folder.
 If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I also recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
 ### Reference Data
 To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/). You can use the code from the [data resources](#data-resources) section to download it.  
 For simplicity, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91) as references. We created a subset of the dataset and performed pre-simulation quality control in the following steps:
 * Select a subpopulation group and exclude IN/DELs.
 ```ruby
-for chr in {1..22..1}
-  do
-  vcftools --gzvcf ALL.chr$chr.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --keep GBR.list.txt --remove-indels --mac 1 --recode --out ./GBR/GBR.chr$chr
-done
+for chr in {1..22..1}; do vcftools --gzvcf ALL.chr$chr.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --keep GBR.list.txt --remove-indels --mac 1 --recode --out ./GBR.chr$chr; done
+#"GBR.list.txt" contains a list of family and individual IDs of GBR subpopulation.
+#"--remove-indels" option removes all IN/DELs.
+#"--mac 1" option removes monomorphic sites.
 ```
-"GBR.list.txt" contains a list of family and individual IDs of GBR subpopulation. "--remove-indels" option removes all IN/DELs. "--mac 1" option removes monomorphic sites.
+* Exclude multi-allelic sites and transfer data to Plink format
+```ruby
+for chr in {1..22..1};do plink2 --vcf GBR.chr$chr.vcf --export vcf --out GBR.chr$chr.clean --rm-dup force-first --max-alleles 2;done
+#"--rm-dup force-first" option removes duplicate-ID variants and only keep the first instance of each.
+#"--max-alleles 2" excludes multi-allelic variants with more than one minor allele.
+```
+* Clean ancestral sequence/FASTA data
+The extracted reference nucleotide sequence contained many sites, particularly at the beginning and end of the chromosome, designated as N in the FASTA data, meaning that the nucleotide at that position is unknown. Besides, there are some M (bases with aMino groups) and R (bases with puRine) in chromosome 3. SLiM requires that the ancestral sequence be composed only of A/C/G/T nucleotides; N/M/R is not a legal option. For this reason, here we change all of those positions to A for SLiM to read; those sites were not involved in SNPs anyway, so this was harmless for our purposes here.
+```ruby
+for chr in {1..22..1};do sed -i 's/N/A/g' hs37d5_chr$chr.fa; done;sed -i 's/M/A/g' hs37d5_chr3.fa;sed -i 's/R/A/g' hs37d5_chr3.fa
+#sed -i 's/N/A/g' replaced all "N"s with "A"s
+#sed -i 's/M/A/g' replaced all "M"s with "A"s
+#sed -i 's/R/A/g' replaced all "R"s with "A"s
+```
+
 ### A quick Simulation
+In this section, we performed a simple simulation using the smallest chromosome (chr22) and a small subset of GBR samples (N=30). In the mating model, we utilized Wright Fisher (WF) model and mated people randomly by ten generations. Controllers/parameters of the model are explained in the script.
+```ruby
+plink2 --vcf GBR.chr22.clean --keep GBR.30list.txt --mac 1 --out ./GBR.chr22.30.recode --export vcf
+#"GBR.30list.txt" contains 30 family and individual IDs of GBR reference samples.
+#Here, we created a subset vcf file of 30 reference GBR samples.
+slim quick.txt
+#Run the simulation code
+plink2 --vcf GBR.input30.out50.gen10.chr22.vcf
+#Show quick stats of the simulated individuals
+```
+As we set a fixed seed for randomization of the simulation example, you shall have 50 GBR samples with 104,915 variants simulated.
+
 ## Simulation Examples
 ## Parameter Effects
 ## Post Simulation Quality Control
@@ -55,9 +81,13 @@ A brief description of the data can be found in the [documentation](http://ftp.1
 In Linux, you can download all VCF format data with FASTA format ancestral sequence using the following code:
 ```ruby
 wget -r -np -nd ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/
+#Download all VCF files and documentations
 wget -r -np -nd ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+#Download the FASTA file
 gzip -d hs37d5.fa.gz
+#Unzip FASTA file
 for chr in {1..22..1};do;samtools faidx hs37d5.fa "$chr" > hs37d5_chr$chr.fa;done
+#Subset FASTA file by chromosomes
 ```
 
 ### Program sources (*All examples in this repository are run in Linux system*)
@@ -113,4 +143,3 @@ Great thanks to the following people for their help and input:
 * [Dr. Wei-min Chen](https://med.virginia.edu/faculty/faculty-listing/wc9c/) shared his expertise and gave us great advice regarding genetic relatedness issues.
 
 
-[def]: data-resources
