@@ -87,10 +87,10 @@ If you have any questions or need help with this handbook, you can either create
 
 ### Regarding related software
 Following are mailing lists for related software:
-* [plink 1.9/2.0](https://plink2-users@googlegroups.com)
-* [SLiM](https://slim-discuss@googlegroups.com)
-* [vcftools](https://vcftools-help@lists.sourceforge.net)
-* [SAMtools](https://samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
+* [plink 1.9/2.0](mailto:plink2-users@googlegroups.com)
+* [SLiM](mailto:slim-discuss@googlegroups.com)
+* [vcftools](mailto:vcftools-help@lists.sourceforge.net)
+* [SAMtools](mailto:samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
