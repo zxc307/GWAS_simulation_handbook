@@ -31,6 +31,10 @@ make slim
 The executive will be created in the "build" folder.
 If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I highly recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
 ### Reference Data
+To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/).
+In this tutorial, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91). We created a subset of the dataset and performed pre-simulation quality control in the following steps:
+
+
 ### A quick Simulation
 ## Simulation Examples
 ## Parameter Effects
@@ -84,10 +88,10 @@ If you have any questions or need help with this handbook, you can either create
 
 ### Regarding related software
 Following are mailing lists for related software:
-* [plink 1.9/2.0](plink2-users@googlegroups.com)
-* [SLiM](slim-discuss@googlegroups.com)
-* [vcftools](vcftools-help@lists.sourceforge.net)
-* [SAMtools](samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
+[plink 1.9/2.0](plink2-users@googlegroups.com)\\
+[SLiM](slim-discuss@googlegroups.com)\\
+[vcftools](vcftools-help@lists.sourceforge.net)\\
+[SAMtools](samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)\\
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
