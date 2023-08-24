@@ -31,12 +31,16 @@ make slim
 The executive will be created in the "build" folder.
 If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I also recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
 ### Reference Data
-To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/). You can use the code from the [data resources](#data-resources) section to download it.
-In this tutorial, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91). We created a subset of the dataset and performed pre-simulation quality control in the following steps:
-* Download data
+To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/). You can use the code from the [data resources](#data-resources) section to download it.  
+For simplicity, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91) as references. We created a subset of the dataset and performed pre-simulation quality control in the following steps:
+* Select a subpopulation group and exclude IN/DELs.
 ```ruby
-
+for chr in {1..22..1}
+  do
+  vcftools --gzvcf ALL.chr$chr.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --keep GBR.list.txt --remove-indels --mac 1 --recode --out ./GBR/GBR.chr$chr
+done
 ```
+"GBR.list.txt" contains a list of family and individual IDs of GBR subpopulation. "--remove-indels" option removes all IN/DELs. "--mac 1" option removes monomorphic sites.
 ### A quick Simulation
 ## Simulation Examples
 ## Parameter Effects
