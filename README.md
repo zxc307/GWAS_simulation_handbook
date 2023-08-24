@@ -17,7 +17,7 @@ We aim to present a straightforward guide to the quality control, data simulatio
 
 ## Getting Started
 ### Install Software
-Visit the SLiM official GitHub repository to download the latest version of the source code: https://github.com/MesserLab/SLiM/releases.
+Visit the SLiM official GitHub repository to download the latest version of the source code: https://github.com/MesserLab/SLiM/releases.  
 Here I presented an example of installation using [CMake](https://cmake.org/) in Linux, as GWAS simulations are heavy loading jobs and usually run on servers/high performance computing systems where Linux is widely used.
 ```ruby
 wget https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM.zip
@@ -29,11 +29,14 @@ cmake ../
 make slim
 ```
 The executive will be created in the "build" folder.
-If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I highly recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
+If you are using other operating systems, please refer to chapter 2 in the [manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). I also recommend MAC users/beginners to try [SLiM GUI](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_OSX_Installer.pkg) as it comes with a straightforward debugging system.
 ### Reference Data
-To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/).
+To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/). You can use the code from the [data resources](#data-resources) section to download it.
 In this tutorial, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91). We created a subset of the dataset and performed pre-simulation quality control in the following steps:
+* Download data
+```ruby
 
+```
 ### A quick Simulation
 ## Simulation Examples
 ## Parameter Effects
@@ -104,3 +107,6 @@ Great thanks to the following people for their help and input:
 * [Dr. Christopher Chang](https://www.linkedin.com/in/christopher-chang-6910a51/) provided great help with Plink-related issues and code debugging.
 * [Dr. Fredrick Schumacher](https://case.edu/medicine/pqhs/about/people/primary-faculty/fredrick-r-schumacher) supervised and funded this project.
 * [Dr. Wei-min Chen](https://med.virginia.edu/faculty/faculty-listing/wc9c/) shared his expertise and gave us great advice regarding genetic relatedness issues.
+
+
+[def]: data-resources
