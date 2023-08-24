@@ -34,7 +34,6 @@ If you are using other operating systems, please refer to chapter 2 in the [manu
 To simulate individual-level GWAS data, we need real samples as founders. Here, we recommend using the well-established 1000-genome project (1KGP), an open-access repository of whole-genome sequencing data of diverse populations (URL: https://www.internationalgenome.org/category/ftp/).
 In this tutorial, we used distinct ancestral subpopulations such as British from England and Scotland (GBR, N=91). We created a subset of the dataset and performed pre-simulation quality control in the following steps:
 
-
 ### A quick Simulation
 ## Simulation Examples
 ## Parameter Effects
@@ -87,11 +86,11 @@ Stdpopsim is a community-maintained standard library of population genetic model
 If you have any questions or need help with this handbook, you can either create an issue under this repository or email me at zxc307@case.edu.
 
 ### Regarding related software
-Following are mailing lists for related software:  
-[plink 1.9/2.0](plink2-users@googlegroups.com)  
-[SLiM](slim-discuss@googlegroups.com)  
-[vcftools](vcftools-help@lists.sourceforge.net)  
-[SAMtools](samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)  
+Following are mailing lists for related software:
+* [plink 1.9/2.0](https://plink2-users@googlegroups.com)
+* [SLiM](https://slim-discuss@googlegroups.com)
+* [vcftools](https://vcftools-help@lists.sourceforge.net)
+* [SAMtools](https://samtools-help@lists.sourceforge.net)： You may need to subscrib to the [samtools-help list](https://sourceforge.net/projects/samtools/lists/samtools-help)
 
 
 You can also get support by creating issues under GitHub repositories of the following software:
