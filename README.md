@@ -71,11 +71,16 @@ As we set a fixed seed for randomization of the simulation example, you shall ha
 ## Simulation Examples
 Here we present five simulation examples using different models and settings.
 ### Model 1 (WF model, uniform distribution of recombination, single chromosome)
+In the first example, we applied WF model and uniform distribution of recombination. Neutral mutation with rate of 1e-7 and random recombination with rate of 1e-8 applied to all simulated variants. We used chromosome 22 as an example in the model. Code details of the model were described in the [SLiM script](./model1.txt).
 ### Model 2 (WF model, recombination based on hotspots, single chromosome)
+In the second example, we applied WF model neutral mutation with rate of 1e-7. However, we simulated recombination sites based on summary of hotspots from 1KGP real data ([the genetic map]()). Code details were described in the [SLiM script](./model2.txt).
 ### Model 3 (WF model, recombination based on hotspots, whole genome)
-### Model 3 (non-WF model, uniform distribution of recombination, age-sensitive survival, single chromosome)
-### Model 4 (non-WF model, uniform distribution of recombination, age-sensitive survival, whole genome)
-### Model 5 (non-WF model, uniform distribution of recombination, neutral mutation, no selection, whole genome)
+SLiM uses two major tick cycles, one is "WF" and the other is "nonWF". You can specify it with option "initializeSLiMModelType()". However, only "nonWF" tick cycle supports customized reproduction model and fixed pedigree input which is required to simulate whole-genome data. Alternatively, we can build a WF model by customizing the survival model in a two-step "nonWF" tick cycle to achieve WF modeling on whole-genome simulation. All settings of recombination and mutations are the same as model 2. Code details were described in the [SLiM script](./model3.txt).
+### Model 4 (non-WF model, recombination based on hotspots, single chromosome)
+In model 4, we applied non-WF model to single chromosome simulation. Simulated samples end up being a mixed generation from random mating. Code details were described in the [SLiM script](./model4.txt).
+### Model 5 (non-WF model, recombination based on hotspots, random survival, whole genome)
+In model 5, we applied non-WF model to whole-genome simulation. We used a two-step simulation. Firstly, we simulated a fixed mating pattern. Secondly, we applied the same mating pattern to all chromosomes. Code details were described in the [SLiM script](./model5.txt).
+
 
 ## Parameter Effects
 ## Post Simulation Quality Control
