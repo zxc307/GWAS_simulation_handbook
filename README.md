@@ -72,6 +72,7 @@ As we set a fixed seed for randomization of the simulation example, you shall ha
 ## Parameter Effects
 ## Post Simulation Quality Control
 ## Files In This Github Repository
+[GBR.30list.txt](./GBR.30list.txt) contains 30 family and individual IDs of GBR reference samples.
 ## Data and Software Resources
 
 ### Data resources
