@@ -1,0 +1,21 @@
+initialize() {
+	initializeSLiMOptions(nucleotideBased=T);//Set the model to nucleotidebased
+	length = initializeAncestralNucleotides("./hs37d5_chr22.fa");//Input ancestral sequence
+	defineConstant("L", length);//Read the length of the sequence from the input
+	initializeMutationTypeNuc("m1", 0.5, "f", 0.0);//Initialize mutation type to neutral
+	initializeGenomicElementType("g1", m1, 1.0, mmJukesCantor(1e-7));//Set mutation rate to 1e-7
+	initializeGenomicElement(g1, 0, L-1);//Set mutation region to the size of the input
+	initializeRecombinationRate(1e-8);//Set uniformly distributed recombination rate to 1e-8
+} 
+1 late() {
+	sim.addSubpop("p1", 30);//Set input sample size to 30
+	p1.genomes.readFromVCF("./GBR.chr22.30.recode.vcf", m1);//Read reference data
+	p1.setSubpopulationSize(90);//Set sample size for each mating generation
+} 
+1:10 late() {
+	setSeed(1245);//Set a random seed
+	mut = sim.mutationsOfType(m1);
+}
+10 late() { 
+	g = p1.sampleIndividuals(50).genomes;//Set output sample size sampled from last mating generation
+	g.outputVCF("./GBR.input30.out50.gen10.chr22.vcf");}//Set path to output simulated data

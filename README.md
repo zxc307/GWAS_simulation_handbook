@@ -69,10 +69,25 @@ plink2 --vcf GBR.input30.out50.gen10.chr22.vcf
 As we set a fixed seed for randomization of the simulation example, you shall have 50 GBR samples with 104,915 variants simulated.
 
 ## Simulation Examples
+Here we present five simulation examples using different models and settings.
+### Model 1 (WF model, uniform distribution of recombination, single chromosome)
+### Model 2 (WF model, recombination based on hotspots, single chromosome)
+### Model 3 (WF model, recombination based on hotspots, whole genome)
+### Model 3 (non-WF model, uniform distribution of recombination, age-sensitive survival, single chromosome)
+### Model 4 (non-WF model, uniform distribution of recombination, age-sensitive survival, whole genome)
+### Model 5 (non-WF model, uniform distribution of recombination, neutral mutation, no selection, whole genome)
+
 ## Parameter Effects
 ## Post Simulation Quality Control
 ## Files In This Github Repository
-[GBR.30list.txt](./GBR.30list.txt) contains 30 family and individual IDs of GBR reference samples.
+[GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.
+[GBR.list.txt](./GBR.list.txt) contains 91 GBR family and individual IDs sampled from 1000-Genome data.
+[quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.
+[model1.txt](.model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model2.txt](.model2.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model3.txt](.model3.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model4.txt](.model4.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model5.txt](.model5.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
 ## Data and Software Resources
 
 ### Data resources
