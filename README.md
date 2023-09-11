@@ -46,7 +46,7 @@ for chr in {1..22..1};do plink2 --vcf GBR.chr$chr.vcf --export vcf --out GBR.chr
 #"--rm-dup force-first" option removes duplicate-ID variants and only keep the first instance of each.
 #"--max-alleles 2" excludes multi-allelic variants with more than one minor allele.
 ```
-* Clean ancestral sequence/FASTA data
+* Clean ancestral sequence/FASTA data  
 The extracted reference nucleotide sequence contained many sites, particularly at the beginning and end of the chromosome, designated as N in the FASTA data, meaning that the nucleotide at that position is unknown. Besides, there are some M (bases with aMino groups) and R (bases with puRine) in chromosome 3. SLiM requires that the ancestral sequence be composed only of A/C/G/T nucleotides; N/M/R is not a legal option. For this reason, here we change all of those positions to A for SLiM to read; those sites were not involved in SNPs anyway, so this was harmless for our purposes here.
 ```ruby
 for chr in {1..22..1};do sed -i 's/N/A/g' hs37d5_chr$chr.fa; done;sed -i 's/M/A/g' hs37d5_chr3.fa;sed -i 's/R/A/g' hs37d5_chr3.fa
