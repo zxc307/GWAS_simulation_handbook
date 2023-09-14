@@ -54,6 +54,11 @@ for chr in {1..22..1};do sed -i 's/N/A/g' hs37d5_chr$chr.fa; done;sed -i 's/M/A/
 #sed -i 's/M/A/g' replaced all "M"s with "A"s
 #sed -i 's/R/A/g' replaced all "R"s with "A"s
 ```
+* Extract summarized recombination hotspots from 1KGP genetic map
+1KGP's genetic map, also known as a genetic linkage map or simply a linkage map, is a representation of the relative locations and distances between recombination hotspots on a chromosome. A detailed description can be found [here](https://github.com/joepickrell/1000-genomes-genetic-maps). Following codes extract recombination hotspots from the genetic map. 
+```ruby
+for chr in {1..22..1};do tail -n +2 genetic_map_chr$chr_combined_b37.txt | awk '{print $1, $2}' > RC.hotspot.chr$chr.txt; done;
+```
 
 ### A quick Simulation
 In this section, we performed a simple simulation using the smallest chromosome (chr22) and a small subset of GBR samples (N=30). In the mating model, we utilized Wright Fisher (WF) model and mated people randomly by ten generations. Controllers/parameters of the model are explained in the script.
@@ -115,13 +120,17 @@ To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by 
 ## Post Simulation Quality Control
 ## Files In This Github Repository
 [GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.  
+[GBR.chr22.30.recode.vcf](./GBR.chr22.30.recode.vcf) a reference VCF file mentioned in [Simulation Examples](#simulation-examples)  
 [GBR.list.txt](./GBR.list.txt) contains 91 GBR family and individual IDs sampled from 1000-Genome data.  
-[quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.  
+[genetic_map_chr22_combined_b37.txt](./genetic_map_chr22_combined_b37.txt) a genetic map mentioned in [Simulation Examples](#simulation-examples)  
+[hs37d5_chr22.fa](./hs37d5_chr22.fa) an ancestral reference mentioned in [Simulation Examples](#simulation-examples)  
 [model1.txt](./model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)  
 [model2.txt](./model2.txt) a SLiM script to simulate samples using model 2 described in [Simulation Examples](#simulation-examples)  
 [model3_1.txt](./model3_1.txt)      [model3_2.txt](./model3_2.txt) two-step scripts to simulate samples using model 3 described in [Simulation Examples](#simulation-examples)  
 [model4.txt](./model4.txt) a SLiM script to simulate samples using model 4 described in [Simulation Examples](#simulation-examples)  
 [model5_1.txt](./model5_1.txt)      [model5_2.txt](./model5_2.txt) two-step scripts to simulate samples using model 5 described in [Simulation Examples](#simulation-examples)  
+[quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.  
+
 ## Data and Software Resources
 
 ### Data resources
