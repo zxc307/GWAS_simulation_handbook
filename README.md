@@ -114,14 +114,14 @@ To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by 
 ## Parameter Effects
 ## Post Simulation Quality Control
 ## Files In This Github Repository
-[GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.
-[GBR.list.txt](./GBR.list.txt) contains 91 GBR family and individual IDs sampled from 1000-Genome data.
-[quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.
-[model1.txt](./model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
-[model2.txt](./model2.txt) a SLiM script to simulate samples using model 2 described in [Simulation Examples](#simulation-examples)
-[model3_1.txt](./model3_1.txt)[model3_2.txt](./model3_2.txt) two-step scripts to simulate samples using model 3 described in [Simulation Examples](#simulation-examples)
-[model4.txt](./model4.txt) a SLiM script to simulate samples using model 4 described in [Simulation Examples](#simulation-examples)
-[model5_1.txt](./model5_1.txt)[model5_2.txt](./model5_2.txt) two-step scripts to simulate samples using model 5 described in [Simulation Examples](#simulation-examples)
+[GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.  
+[GBR.list.txt](./GBR.list.txt) contains 91 GBR family and individual IDs sampled from 1000-Genome data.  
+[quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.  
+[model1.txt](./model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)  
+[model2.txt](./model2.txt) a SLiM script to simulate samples using model 2 described in [Simulation Examples](#simulation-examples)  
+[model3_1.txt](./model3_1.txt)      [model3_2.txt](./model3_2.txt) two-step scripts to simulate samples using model 3 described in [Simulation Examples](#simulation-examples)  
+[model4.txt](./model4.txt) a SLiM script to simulate samples using model 4 described in [Simulation Examples](#simulation-examples)  
+[model5_1.txt](./model5_1.txt)      [model5_2.txt](./model5_2.txt) two-step scripts to simulate samples using model 5 described in [Simulation Examples](#simulation-examples)  
 ## Data and Software Resources
 
 ### Data resources
