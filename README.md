@@ -190,6 +190,6 @@ Great thanks to the following people for their help and input:
 * [Dr. Benjamin C. Haller](http://benhaller.com/) provided invaluable assistance in coding and SLiM debugging.
 * [Dr. Christopher Chang](https://www.linkedin.com/in/christopher-chang-6910a51/) provided great help with Plink-related issues and code debugging.
 * [Dr. Fredrick Schumacher](https://case.edu/medicine/pqhs/about/people/primary-faculty/fredrick-r-schumacher) supervised and funded this project.
-* [Dr. Wei-min Chen](https://med.virginia.edu/faculty/faculty-listing/wc9c/) shared his expertise and gave us great advice regarding genetic relatedness issues.
+* [Dr. Wei-min Chen](https://www.chen.kingrelatedness.com/) shared his expertise and gave us great advice regarding genetic relatedness issues.
 
 
