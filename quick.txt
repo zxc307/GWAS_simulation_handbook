@@ -17,5 +17,5 @@ initialize() {
 	mut = sim.mutationsOfType(m1);
 }
 10 late() { 
-	g = p1.sampleIndividuals(50).genomes;//Set output sample size sampled from last mating generation
+	g = p1.sampleIndividuals(50).genomes;//Set output sample size sampled from 10th generation
 	g.outputVCF("./GBR.input30.out50.gen10.chr22.vcf");}//Set path to output simulated data

@@ -1,0 +1,44 @@
+initialize() {
+initializeSLiMModelType("nonWF");//Use nonWF tick circle
+defineConstant("K", 240);//Set pool size of each generation
+initializeMutationType("m1", 0.5, "f", 0.0);//Set neutral mutation
+m1.convertToSubstitution = T;//Convert fixed mutation to substitution
+initializeGenomicElementType("g1", m1, 1.0);
+initializeGenomicElement(g1, 0, 99999999);
+initializeMutationRate(1e-7);//Set mutation rate
+initializeRecombinationRate(1e-8);//Set recombination rate
+// delete any existing pedigree log files
+deleteFile("./model3.mating.txt");
+deleteFile("./model3.death.txt");
+}
+reproduction() {
+// choose a mate and generate an offspring
+mate = subpop.sampleIndividuals(1);
+child = subpop.addCrossed(individual, mate);
+child.tag = sim.tag;
+sim.tag = sim.tag + 1;
+// log the mating (#generation,#parent1,#parent2,#sampleID)
+line = paste(community.tick, individual.tag, mate.tag, child.tag);
+writeFile("./model3.mating.txt", line, append=T);
+}
+1 early() {
+sim.addSubpop("p1", 30);
+// provide initial tags and remember the next tag value
+p1.individuals.tag = 1:30;
+sim.tag = 30+1;
+}
+:30 early() {
+// p1 has selection only to achieve non-overlapping generations
+inds = p1.individuals;
+if (p1.individualCount > K)
+inds[inds.age > 0].fitnessScaling = 0;
+}
+survival() {
+if (!surviving) {
+// log the death (#generation,#sampleID)
+line = community.tick + " " + individual.tag;
+writeFile("./model3.death.txt", line, append=T);
+}
+return NULL;
+}
+30 late() { sim.simulationFinished(); }

@@ -62,7 +62,7 @@ plink2 --vcf GBR.chr22.clean --keep GBR.30list.txt --mac 1 --out ./GBR.chr22.30.
 #"GBR.30list.txt" contains 30 family and individual IDs of GBR reference samples.
 #Here, we created a subset vcf file of 30 reference GBR samples.
 slim quick.txt
-#Run the simulation code
+#Run the simulation code; "quick.txt" is provided in this repository
 plink2 --vcf GBR.input30.out50.gen10.chr22.vcf
 #Show quick stats of the simulated individuals
 ```
@@ -71,16 +71,45 @@ As we set a fixed seed for randomization of the simulation example, you shall ha
 ## Simulation Examples
 Here we present five simulation examples using different models and settings.
 ### Model 1 (WF model, uniform distribution of recombination, single chromosome)
-In the first example, we applied WF model and uniform distribution of recombination. Neutral mutation with rate of 1e-7 and random recombination with rate of 1e-8 applied to all simulated variants. We used chromosome 22 as an example in the model. Code details of the model were described in the SLiM script ([model1](./model1.txt)).
-### Model 2 (WF model, recombination based on hotspots, single chromosome)
-In the second example, we applied WF model neutral mutation with rate of 1e-7. However, we simulated recombination sites based on summary of hotspots from 1KGP real data ([the genetic map]()). Code details were described in the SLiM script ([model2](./model2.txt)).
-### Model 3 (WF model, recombination based on hotspots, whole genome)
-SLiM uses two major tick cycles, one is "WF" and the other is "nonWF". You can specify it with option "initializeSLiMModelType()". However, only "nonWF" tick cycle supports customized reproduction model and fixed pedigree input which is required to simulate whole-genome data. Alternatively, we can build a WF model by customizing the survival model in a two-step "nonWF" tick cycle to achieve WF modeling on whole-genome simulation. All settings of recombination and mutations are the same as model 2. Code details were described in the SLiM script ([model3](./model3.txt)).
-### Model 4 (non-WF model, recombination based on hotspots, single chromosome)
-In model 4, we applied non-WF model to single chromosome simulation. Simulated samples end up being a mixed generation from random mating. Code details were described in the SLiM script ([model4](./model4.txt)).
-### Model 5 (non-WF model, recombination based on hotspots, random survival, whole genome)
-In model 5, we applied non-WF model to whole-genome simulation. We used a two-step simulation. Firstly, we simulated a fixed mating pattern. Secondly, we applied the same mating pattern to all chromosomes. Code details were described in the SLiM script ([model5](./model5.txt)).
+In the first example, we applied WF model and uniform distribution of recombination. Neutral mutation with rate of 1e-7 and random recombination with rate of 1e-8 applied to all simulated variants. We used chromosome 22 as an example in the model. Details of the model were described in the SLiM script ([model1](./model1.txt)). Following are codes to create plink format data.
+```ruby
+slim model1.txt #run slim simulation
+awk -F'\t' '!/^#/{$1="22";$3="chr22_"$2} 1' OFS='\t' model1.vcf > temp && mv temp model1.vcf #correct chromosome number and name SNPs by chromosome and positions
+plink --vcf model1.vcf --make-bed --out model1 #convert to bi-allelic plink format files, will only keep the most frequenct ALT
+```
 
+### Model 2 (WF model, recombination based on hotspots, single chromosome)
+In the second example, we applied WF model neutral mutation with rate of 1e-7. However, we simulated recombination sites based on summary of hotspots from 1KGP real data ([the genetic map](./genetic_map_chr22_combined_b37.txt)). Code details were described in the SLiM script ([model2](./model2.txt)). Following are codes to create plink format data.
+```ruby
+slim model2.txt #run slim simulation
+awk -F'\t' '!/^#/{$1="22";$3="chr22_"$2} 1' OFS='\t' model2.vcf > temp && mv temp model2.vcf #correct chromosome number and name SNPs by chromosome and positions
+plink --vcf model2.vcf --make-bed --out model2 #convert to bi-allelic plink format files, will only keep the most frequenct ALT
+```
+### Model 3 (WF model, recombination based on hotspots, whole genome)
+SLiM uses two major tick cycles, one is "WF" and the other is "nonWF". You can specify it with option "initializeSLiMModelType()". However, only "nonWF" tick cycle supports customized reproduction model and fixed pedigree input which is required to simulate whole-genome data. Alternatively, we can build a WF model by customizing the survival model in a two-step "nonWF" tick cycle to achieve WF modeling on whole-genome simulation. Typically, we dropped all parents in the survival model in the tick cycle. All settings of recombination and mutations are the same as model 2. Pool size of each generation is 240 (30 * 2^3).  
+Firstly, we simulated a fixed mating pattern. Secondly, we applied the mating pattern to chromosome 22 as an example. Code details were described in the SLiM script ([model3_1](./model3_1.txt))([model3_2](./model3_2.txt)). Following are codes to create plink format data. Additionally, you will have all survived IDs of the latest generation recorded in the "model3.mating.txt" file.
+```ruby
+slim model3_1.txt;slim model3_2.txt #run two-step model
+awk -F'\t' '!/^#/{$1="22";$3="chr22_"$2} 1' OFS='\t' model3.vcf > temp && mv temp model3.vcf #correct chromosome number and name SNPs by chromosome and positions
+plink --vcf model3.vcf --make-bed --out model3 #convert to bi-allelic plink format files, will only keep the most frequenct ALT
+```
+To simulate other chromosomes, simply customize ([model3_2](./model3_2.txt)) by change the chromosome number. In this model, you can apply a fixed mating pattern to all chromosomes to achieve whole-genome simulation.  
+
+### Model 4 (non-WF model, recombination based on hotspots, single chromosome)
+In model 4, we applied non-WF model to single chromosome simulation. Simulated samples end up being a mixed generation from random mating. Code details were described in the SLiM script ([model4](./model4.txt)). Following are codes to create plink format data. Samples will be simulated from a mixed generation with randomization.
+```ruby
+slim model4.txt 
+awk -F'\t' '!/^#/{$1="22";$3="chr22_"$2} 1' OFS='\t' model4.vcf > temp && mv temp model4.vcf #correct chromosome number and name SNPs by chromosome and positions
+plink --vcf model4.vcf --make-bed --out model4 #convert to bi-allelic plink format files, will only keep the most frequenct ALT
+```
+### Model 5 (non-WF model, recombination based on hotspots, random survival, whole genome)
+In model 5, we applied non-WF model to whole-genome simulation. We used a two-step simulation. Firstly, we simulated a fixed mating pattern. Secondly, we applied the mating pattern to chromosome 22 as an example. Code details were described in the SLiM script ([model5_1](./model5_1.txt))([model5_2](./model5_2.txt)). Following are codes to create plink format data. Additionally, you will have all survived IDs of a mixed generation recorded in the "model5.mating.txt" file.
+```ruby
+slim model5_1.txt;slim model5_2.txt #run two-step model
+awk -F'\t' '!/^#/{$1="22";$3="chr22_"$2} 1' OFS='\t' model5.vcf > temp && mv temp model5.vcf #correct chromosome number and name SNPs by chromosome and positions
+plink --vcf model5.vcf --make-bed --out model5 #convert to bi-allelic plink format files, will only keep the most frequenct ALT
+```
+To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by change the chromosome number. In this model, you can apply a fixed mating pattern to all chromosomes to achieve whole-genome simulation.  
 
 ## Parameter Effects
 ## Post Simulation Quality Control
@@ -88,11 +117,11 @@ In model 5, we applied non-WF model to whole-genome simulation. We used a two-st
 [GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.
 [GBR.list.txt](./GBR.list.txt) contains 91 GBR family and individual IDs sampled from 1000-Genome data.
 [quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.
-[model1.txt](.model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
-[model2.txt](.model2.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
-[model3.txt](.model3.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
-[model4.txt](.model4.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
-[model5.txt](.model5.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model1.txt](./model1.txt) a SLiM script to simulate samples using model 1 described in [Simulation Examples](#simulation-examples)
+[model2.txt](./model2.txt) a SLiM script to simulate samples using model 2 described in [Simulation Examples](#simulation-examples)
+[model3_1.txt](./model3_1.txt)[model3_2.txt](./model3_2.txt) two-step scripts to simulate samples using model 3 described in [Simulation Examples](#simulation-examples)
+[model4.txt](./model4.txt) a SLiM script to simulate samples using model 4 described in [Simulation Examples](#simulation-examples)
+[model5_1.txt](./model5_1.txt)[model5_2.txt](./model5_2.txt) two-step scripts to simulate samples using model 5 described in [Simulation Examples](#simulation-examples)
 ## Data and Software Resources
 
 ### Data resources

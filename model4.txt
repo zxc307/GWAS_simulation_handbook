@@ -1,0 +1,44 @@
+initialize() {
+initializeSLiMModelType("nonWF");//Use non-WF tick cycle
+initializeSLiMOptions(nucleotideBased=T);//Use nucleotide based model
+length = initializeAncestralNucleotides("./hs37d5_chr22.fa");//Read sequence tab
+defineConstant("L", length);//Set region size
+defineConstant("K", 240);//Set pool size of each generation
+initializeMutationTypeNuc("m1", 0.5, "f", 0.0);//Set neutral mutation 
+m1.convertToSubstitution = T;//Convert fixed mutation to substitution
+initializeGenomicElementType("g1", m1, 1.0, mmJukesCantor(1e-7));//Set mutation rate
+initializeGenomicElement(g1, 0, L-1); //Set mutation region
+deleteFile("./model4.live.txt");
+lines = readFile("./RC.hotspot.chr22.txt");//Read recombination hotspots
+	rates = NULL;
+	ends = NULL;
+	for (line in lines)
+	{
+	components = strsplit(line, " ");
+	ends = c(ends, asInteger(components[0]));
+	rates = c(rates, asFloat(components[1])* 1e-8);
+	}
+	ends = c(ends[1:(size(ends)-1)] - 2, L-1);
+	initializeRecombinationRate(rates, ends);
+}
+reproduction() {
+// generate all offspring for the tick
+subpop.addCrossed(individual, subpop.sampleIndividuals(1));
+}
+1 early() {
+sim.addSubpop("p1", 30);
+}
+early() {
+//Random sampling
+p1.fitnessScaling = K / p1.individualCount;
+}
+1 late() {
+	p1.genomes.readFromVCF("./GBR.chr22.30.recode.vcf", m1);//Read reference vcf
+} 
+1:30 late() {
+	mut = sim.mutationsOfType(m1);//Simulate mutation
+}
+30 late() { 
+	g = p1.sampleIndividuals(200).genomes;//Sampling from the pool
+	g.outputVCF("./model4.vcf",simplifyNucleotides=T);//Output vcf
+	sim.simulationFinished();}

@@ -1,0 +1,21 @@
+initialize() {
+	initializeSLiMOptions(nucleotideBased=T);//Set the model to nucleotidebased
+	length = initializeAncestralNucleotides("./hs37d5_chr22.fa");//Input ancestral sequence
+	defineConstant("L", length);//Read the length of the sequence from the input
+	initializeMutationTypeNuc("m1", 0.5, "f", 0.0);//Initialize mutation type to neutral
+	initializeGenomicElementType("g1", m1, 1.0, mmJukesCantor(1e-7));//Set mutation rate to 1e-7
+	initializeGenomicElement(g1, 0, L-1);//Set mutation region to the size of the input
+	initializeRecombinationRate(1e-8);//Set uniformly distributed recombination rate to 1e-8
+} 
+1 late() {
+	sim.addSubpop("p1", 30);//Set input sample size to 30
+	p1.genomes.readFromVCF("./GBR.chr22.30.recode.vcf", m1);//Read reference data
+	p1.setSubpopulationSize(240);//Set sample size for each mating generation, sample size doubled at each generation in WF model, so pool size has to be (original size * exponentiation of 2)
+} 
+1:30 late() {
+	setSeed(1245);//Set a random seed
+	mut = sim.mutationsOfType(m1);
+}
+30 late() { 
+	g = p1.sampleIndividuals(200).genomes;//Set output sample size sampled from 30th generation
+	g.outputVCF("./model1.vcf",simplifyNucleotides=T);}//Set path to output simulated data

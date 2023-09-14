@@ -1,0 +1,74 @@
+// customize a function to read .txt files
+function (i)readIntTable(s$ path)
+{
+	if (!fileExists(path))
+	stop("readIntTable(): File not found at path " + path);
+	l = readFile(path);
+	m = sapply(l, "asInteger(strsplit(applyValue));", simplify="matrix");
+	return t(m);
+}
+initialize() {
+initializeSLiMModelType("nonWF");//Use non-WF tick cycle
+initializeSLiMOptions(nucleotideBased=T);//Use nucleotide based model
+length = initializeAncestralNucleotides("./hs37d5_chr22.fa");//Read sequence tab
+defineConstant("L", length);//Set region size
+defineConstant("K", 240);//Set pool size of each generation
+initializeMutationTypeNuc("m1", 0.5, "f", 0.0);//Set neutral mutation 
+m1.convertToSubstitution = T;//Convert fixed mutation to substitution
+initializeGenomicElementType("g1", m1, 1.0, mmJukesCantor(1e-7));//Set mutation rate
+initializeGenomicElement(g1, 0, L-1); //Set mutation region
+deleteFile("./model5.live.txt");
+lines = readFile("./RC.hotspot.chr22.txt");//Read recombination hotspots
+	rates = NULL;
+	ends = NULL;
+	for (line in lines)
+	{
+	components = strsplit(line, " ");
+	ends = c(ends, asInteger(components[0]));
+	rates = c(rates, asFloat(components[1])* 1e-8);
+	}
+	ends = c(ends[1:(size(ends)-1)] - 2, L-1);
+	initializeRecombinationRate(rates, ends);
+// read in the pedigree log files
+defineConstant("M", readIntTable("./model5.mating.txt"));
+defineConstant("D", readIntTable("./model5.death.txt"));
+// extract the ticks for quick lookup
+defineConstant("Mt", drop(M[,0]));
+defineConstant("Dt", drop(D[,0]));
+}
+reproduction() {
+// generate all offspring for the tick
+m = M[Mt == community.tick,];
+for (index in seqLen(nrow(m))) {
+row = m[index,];
+ind = subpop.subsetIndividuals(tag=row[,1]);
+mate = subpop.subsetIndividuals(tag=row[,2]);
+child = subpop.addCrossed(ind, mate);
+child.tag = row[,3];
+}
+self.active = 0;
+}
+1 early() {
+sim.addSubpop("p1", 30);
+// provide initial tags matching the original model
+p1.individuals.tag = 1:30;
+}
+early() {
+// execute the predetermined mortality
+inds = p1.individuals;
+inds.fitnessScaling = 1.0;
+d = drop(D[Dt == community.tick, 1]);
+indices = match(d, inds.tag);
+inds[indices].fitnessScaling = 0.0;
+}
+1 late() {
+	p1.genomes.readFromVCF("./GBR.chr22.30.recode.vcf", m1);//Read reference vcf
+} 
+1:30 late() {
+	mut = sim.mutationsOfType(m1);//Simulate mutation
+}
+30 late() { 
+	g = p1.sampleIndividuals(200).genomes;//Sampling from the pool
+	g.outputVCF("./model5.vcf",simplifyNucleotides=T);//Output vcf
+	writeFile("./model5.live.txt", paste(matrix(g.individual.tag,2)[1,]), append=T);//Record simulated IDs
+	sim.simulationFinished();}
