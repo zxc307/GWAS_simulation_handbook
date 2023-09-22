@@ -121,13 +121,14 @@ To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by 
 ## Parameter Effects
 We've tested the following parameters in our simulation study.  
 * Simulated region size  
-We compared simulation of chromosome 22 with chromosome 1, and observed that simulating a large region led to a reduced relatedness. This is due to the larger region's greater expectation of number of recombination events, resulting in increased genetic variability and, consequently, lower relatedness from simulation. A large region also covers more LD blocks and lead to a high precision in PCA analysis while analyzing ancestral information of simulated data  
+
+In our analysis, we contrasted the simulation of chromosome 22 with that of chromosome 1 and noted a decrease in relatedness when simulating larger genomic regions. This decline in relatedness can be attributed to the larger region's higher anticipated number of recombination events, which in turn contributes to greater genetic diversity and, consequently, diminished relatedness in the simulated data. Additionally, a larger genomic region encompasses more linkage disequilibrium (LD) blocks, resulting in enhanced precision when performing PCA analysis for the examination of ancestral information in the simulated dataset.  
 * WF vs nonWF model  
-We found nonWF model resulted in a slightly higher relatedness than WF model and more diversity of ancestry in simulated data. This is due to the multi-generation sampling after every mating generation.  
+Our findings indicate that the nonWF model produced slightly greater relatedness compared to the WF model, along with increased ancestry diversity in the simulated data. This outcome can be attributed to the multi-generation sampling that occurs after each mating generation in the nonWF model, which introduces additional genetic diversity and influences relatedness levels.  
 * Input sample size  
-In our study, we tested input sample sizes of 30, 60 and 90. A larger input sample size reduces the difference in ancestry between simulated and referenced data. However, input sample size is irrelevant to the relatedness of simulated data.  
+In our study, we examined input sample sizes of 30, 60, and 90. A larger input sample size tends to diminish the disparities in ancestry between the simulated and referenced data. However, it's important to note that the input sample size has no bearing on the relatedness of the simulated data.  
 * Number of mating generations  
-We tested 30, 100 and 300 mating generations in our study. We found 30 generations of mating is enough to create some diversity for simulated data. A longer mating generation covers more cumulative genetic randomness from recombination and mutation, and increases the difference in ancestry between simulated and referenced data.  
+We conducted tests involving 30, 100, and 300 mating generations. We determined that employing 30 generations of mating is sufficient to introduce some degree of diversity in the simulated data. However, using a greater number of mating generations, such as 100 or 300, encompasses a larger accumulation of genetic randomness through recombination and mutation. Consequently, this extended mating duration results in a more pronounced distinction in ancestry between the simulated and referenced data.  
   
 Detailed discussions can be found in our recent publication (TBD). If you have more experience to share or any questions, please post via [Issues](https://github.com/zxc307/GWAS_simulation_handbook/issues)  
 ## Files In This Github Repository
