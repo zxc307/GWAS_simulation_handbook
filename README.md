@@ -118,7 +118,7 @@ plink --vcf model5.vcf --make-bed --out model5 #convert to bi-allelic plink form
 To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by change the chromosome number. In this model, you can apply a fixed mating pattern to all chromosomes to achieve whole-genome simulation.  
 
 ## Parameter Effects
-We've tested the following parameters in our simulation study. If you have more experience to share or any questions, please post via #Issues  
+We've tested the following parameters in our simulation study. If you have more experience to share or any questions, please post via [Issues](https://github.com/zxc307/GWAS_simulation_handbook/issues)  
 * Simulated region size  
 We compared simulation of chromosome 22 with chromosome 1, and observed that simulating a large region led to a reduced relatedness. This is due to the larger region's greater expectation of number of recombination events, resulting in increased genetic variability and, consequently, lower relatedness from simulation. A large region also covers more LD blocks and lead to a high precision in PCA analysis while analyzing ancestral information of simulated data  
 * WF vs nonWF model  
