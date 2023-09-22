@@ -120,14 +120,13 @@ To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by 
 ## Parameter Effects
 We've tested the following parameters in our simulation study. If you have more experience to share or any questions, please post via #Issues  
 * Simulated region size  
-We observed that simulating a large region led to a reduced relatedness. This is due to the larger region's greater expectation of number of recombination events, resulting in increased genetic variability and, consequently, lower relatedness from simulation. A large region also covers more LD blocks and lead to a high precision in PCA analysis while analyzing ancestral information of simulated data  
+We compared simulation of chromosome 22 with chromosome 1, and observed that simulating a large region led to a reduced relatedness. This is due to the larger region's greater expectation of number of recombination events, resulting in increased genetic variability and, consequently, lower relatedness from simulation. A large region also covers more LD blocks and lead to a high precision in PCA analysis while analyzing ancestral information of simulated data  
 * WF vs nonWF model  
 We found nonWF model resulted in a slightly higher relatedness than WF model and more diversity of ancestry in simulated data. This is due to the multi-generation sampling after every mating generation.  
 * Input sample size  
-In our study, a larger input sample size reduced the difference in ancestry between simulated and referenced data. However, input sample size is irrelevant to the relatedness of simulated data.  
+In our study, we tested input sample sizes of 30, 60 and 90. A larger input sample size reduces the difference in ancestry between simulated and referenced data. However, input sample size is irrelevant to the relatedness of simulated data.  
 * Number of mating generations  
 We tested 30, 100 and 300 mating generations in our study. We found 30 generations of mating is enough to create some diversity for simulated data. A longer mating generation covers more cumulative genetic randomness from recombination and mutation, and increases the difference in ancestry between simulated and referenced data.  
-## Post Simulation Quality Control
 ## Files In This Github Repository
 [GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.  
 [GBR.chr22.30.recode.vcf](./GBR.chr22.30.recode.vcf) a reference VCF file mentioned in [Simulation Examples](#simulation-examples)  
