@@ -14,7 +14,8 @@
 
 ## About This Handbook
 
-We aim to present a straightforward guide to the quality control, data simulation and simulation quality assessment of individual-level pseudo GWAS data. Our handbook targets on beginners of GWAS simulation. Advanced users requiring more complex modeling strategies are recommended to consult software developer’s websites to seek options that are more sophisticated. A brief list of these is provided in the [Data and Software Resources](#data-and-software-resources) section.
+Our objective is to offer a clear and user-friendly guide for quality control, data simulation, and the assessment of simulation quality for individual-level pseudo GWAS data. The insights shared here draw from our recent publication (TBD).  
+This handbook is tailored for individuals new to GWAS simulation, providing a straightforward approach. For advanced users seeking more intricate modeling strategies, we recommend visiting the software developer's websites to explore more sophisticated options.A brief list of these is provided in the [Data and Software Resources](#data-and-software-resources) section.
 
 ## Getting Started
 ### Install Software
@@ -118,7 +119,7 @@ plink --vcf model5.vcf --make-bed --out model5 #convert to bi-allelic plink form
 To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by change the chromosome number. In this model, you can apply a fixed mating pattern to all chromosomes to achieve whole-genome simulation.  
 
 ## Parameter Effects
-We've tested the following parameters in our simulation study. If you have more experience to share or any questions, please post via [Issues](https://github.com/zxc307/GWAS_simulation_handbook/issues)  
+We've tested the following parameters in our simulation study.  
 * Simulated region size  
 We compared simulation of chromosome 22 with chromosome 1, and observed that simulating a large region led to a reduced relatedness. This is due to the larger region's greater expectation of number of recombination events, resulting in increased genetic variability and, consequently, lower relatedness from simulation. A large region also covers more LD blocks and lead to a high precision in PCA analysis while analyzing ancestral information of simulated data  
 * WF vs nonWF model  
@@ -127,6 +128,8 @@ We found nonWF model resulted in a slightly higher relatedness than WF model and
 In our study, we tested input sample sizes of 30, 60 and 90. A larger input sample size reduces the difference in ancestry between simulated and referenced data. However, input sample size is irrelevant to the relatedness of simulated data.  
 * Number of mating generations  
 We tested 30, 100 and 300 mating generations in our study. We found 30 generations of mating is enough to create some diversity for simulated data. A longer mating generation covers more cumulative genetic randomness from recombination and mutation, and increases the difference in ancestry between simulated and referenced data.  
+  
+Detailed discussions can be found in our recent publication (TBD). If you have more experience to share or any questions, please post via [Issues](https://github.com/zxc307/GWAS_simulation_handbook/issues)  
 ## Files In This Github Repository
 [GBR.30list.txt](./GBR.30list.txt) contains 30 GBR family and individual IDs sampled from 1000-Genome data.  
 [GBR.chr22.30.recode.vcf](./GBR.chr22.30.recode.vcf) a reference VCF file mentioned in [Simulation Examples](#simulation-examples)  
