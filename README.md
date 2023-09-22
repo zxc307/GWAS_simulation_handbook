@@ -121,7 +121,6 @@ To simulate other chromosomes, simply customize ([model5_2](./model5_2.txt)) by 
 ## Parameter Effects
 We've tested the following parameters in our simulation study.  
 * Simulated region size  
-
 In our analysis, we contrasted the simulation of chromosome 22 with that of chromosome 1 and noted a decrease in relatedness when simulating larger genomic regions. This decline in relatedness can be attributed to the larger region's higher anticipated number of recombination events, which in turn contributes to greater genetic diversity and, consequently, diminished relatedness in the simulated data. Additionally, a larger genomic region encompasses more linkage disequilibrium (LD) blocks, resulting in enhanced precision when performing PCA analysis for the examination of ancestral information in the simulated dataset.  
 * WF vs nonWF model  
 Our findings indicate that the nonWF model produced slightly greater relatedness compared to the WF model, along with increased ancestry diversity in the simulated data. This outcome can be attributed to the multi-generation sampling that occurs after each mating generation in the nonWF model, which introduces additional genetic diversity and influences relatedness levels.  
