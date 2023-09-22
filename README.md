@@ -76,7 +76,7 @@ plink2 --vcf GBR.input30.out50.gen10.chr22.vcf
 As we set a fixed seed for randomization of the simulation example, you shall have 50 GBR samples with 104,915 variants simulated.
 
 ## Simulation Examples
-Here we present five simulation examples using different models and settings.
+Here we present five simulation examples using different settings and sampling models after every mating generation.
 ### Model 1 (WF model, uniform distribution of recombination, single chromosome)
 In the first example, we applied WF model and uniform distribution of recombination. Neutral mutation with rate of 1e-7 and random recombination with rate of 1e-8 applied to all simulated variants. We used chromosome 22 as an example in the model. Details of the model were described in the SLiM script ([model1](./model1.txt)). Following are codes to create plink format data.
 ```ruby
