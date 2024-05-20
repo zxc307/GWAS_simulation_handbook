@@ -143,6 +143,9 @@ Detailed discussions can be found in our recent publication (TBD). If you have m
 [model5_1.txt](./model5_1.txt)      [model5_2.txt](./model5_2.txt) two-step scripts to simulate samples using model 5 described in [Simulation Examples](#simulation-examples)  
 [quick.txt](./quick.txt) an example SLiM script to simulate 50 GBR samples with 104,915 variants.  
 
+## About Computational Time
+The current version of our SGO model does not benefit from parallelization. To simulate 200 individuals from 30 references using Intel Xeon E5-2670 2.3 GHz CPUs, demos 1, 2, and 4, which utilize a one-step simulation, take 24 seconds, 25 seconds, and 27 seconds, respectively. Demos 3 and 5, which use a two-step simulation, take 48 seconds and 46 seconds, respectively. We are considering introducing tree-sequence methods to increase the speed and reduce the time cost.
+
 ## Data and Software Resources
 
 ### Data resources
