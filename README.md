@@ -14,7 +14,7 @@
 
 ## About This Handbook
 
-Our objective is to offer a clear and user-friendly guide for quality control, data simulation, and the assessment of simulation quality for individual-level pseudo GWAS data. The insights shared here draw from our recent publication (TBD).  
+Our objective is to offer a clear and user-friendly guide for quality control, data simulation, and the assessment of simulation quality for individual-level pseudo GWAS data. The insights shared here draw from our recent publication ([Small-group originating model: Optimized individual-level GWAS simulation featured by SLiM and using open-access data](https://www.sciencedirect.com/science/article/abs/pii/S147692712400135X)).  
 This handbook is tailored for individuals new to GWAS simulation, providing a straightforward approach. For advanced users seeking more intricate modeling strategies, we recommend visiting the software developer's websites to explore more sophisticated options.A brief list of these is provided in the [Data and Software Resources](#data-and-software-resources) section.
 
 ## Getting Started
